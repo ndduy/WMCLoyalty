@@ -1,13 +1,13 @@
 package com.dinosys.wmcloyalty.ui.activity.welcome;
 
-import android.content.Intent;
 import android.view.View;
 
+import com.dinosys.wmcloyalty.R;
 import com.dinosys.wmcloyalty.ui.activity.base.BaseActivity;
 import com.dinosys.wmcloyalty.ui.activity.promotion.DetailPromotionActivity;
 import com.dinosys.wmcloyalty.ui.adapter.welcome.PromotionPagerAdapter;
-import com.dinosys.wmcloyalty.ui.fragment.welcome.WelcomeFragment;
 import com.dinosys.wmcloyalty.ui.fragment.base.BaseFragment;
+import com.dinosys.wmcloyalty.ui.fragment.welcome.WelcomeFragment;
 import com.dinosys.wmcloyalty.ui.model.PromotionModel;
 
 public class WelcomeActivity
@@ -26,6 +26,6 @@ public class WelcomeActivity
 
     @Override
     public void onPromotionItemClicked(PromotionModel model, View view) {
-        startActivity(new Intent(this, DetailPromotionActivity.class));
+        DetailPromotionActivity.viewPromotionDetail(this, model, view.findViewById(R.id.imgCover));
     }
 }

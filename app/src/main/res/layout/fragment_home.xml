@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:CircleIndicator="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:CircleIndicator="http://schemas.android.com/apk/res-auto"
     android:animateLayoutChanges="true">
 
     <ImageView
@@ -25,12 +25,12 @@
             style="@style/AppTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="50dp"
             android:alpha="0"
             android:gravity="center"
             android:text="@string/owner"
-            android:textSize="@dimen/font_size_xlarge"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="50dp"/>
+            android:textSize="@dimen/font_size_xlarge" />
 
 
         <android.support.v4.view.ViewPager
@@ -46,34 +46,34 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:visibility="gone"
             android:indeterminate="true"
-            android:indeterminateTintMode="src_in"
             android:indeterminateTint="@color/colorPrimary"
+            android:indeterminateTintMode="src_in"
+            android:visibility="gone"
             />
 
         <com.dinosys.wmcloyalty.util.widget.viewpager.CircleIndicator
+            android:id="@+id/indicator"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:layout_centerVertical="true"
-            android:id="@+id/indicator"
-            android:layout_marginTop="5dp"
-            CircleIndicator:ci_background="@android:color/white"
-            CircleIndicator:ci_selected_background="@color/colorAccent"
-            CircleIndicator:ci_mode="outside"
-            CircleIndicator:ci_gravity="center"
-            CircleIndicator:ci_radius="5dp"
-            CircleIndicator:ci_margin="5dp"
             android:layout_below="@id/viewPagePromotions"
-            android:visibility="gone"/>
+            android:layout_centerVertical="true"
+            android:layout_marginTop="5dp"
+            android:visibility="gone"
+            CircleIndicator:ci_background="@android:color/white"
+            CircleIndicator:ci_gravity="center"
+            CircleIndicator:ci_margin="5dp"
+            CircleIndicator:ci_mode="outside"
+            CircleIndicator:ci_radius="5dp"
+            CircleIndicator:ci_selected_background="@color/colorAccent" />
 
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingEnd="@dimen/activity_horizontal_margin"
-            android:paddingStart="@dimen/activity_horizontal_margin"
             android:layout_alignParentBottom="true"
-            android:layout_marginBottom="50dp">
+            android:layout_marginBottom="50dp"
+            android:paddingEnd="@dimen/activity_horizontal_margin"
+            android:paddingStart="@dimen/activity_horizontal_margin">
 
             <Button
                 android:id="@+id/btnSignIn"
@@ -81,7 +81,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:alpha="1"
+                android:alpha="0"
                 android:text="@string/btn_sign_in" />
         </FrameLayout>
 

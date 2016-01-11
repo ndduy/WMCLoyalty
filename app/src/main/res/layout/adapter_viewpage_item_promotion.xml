@@ -11,77 +11,76 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="300dp"
-        android:background="@android:color/white"
         >
 
         <ImageView
-            android:id="@+id/cover"
+            android:id="@+id/imgCover"
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:contentDescription="@null"
-            android:src="@drawable/skyline_hotel_nyc"
-            android:scaleType="centerCrop"/>
+            android:scaleType="centerCrop"
+            android:src="@drawable/skyline_hotel_nyc" />
 
         <TextView
             android:id="@+id/textTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/cover"
-            android:layout_marginStart="8dp"
+            android:layout_below="@id/imgCover"
             android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:textColor="@color/colorPrimaryDark"
             android:text="@string/pro_title"
+            android:textColor="@color/colorPrimaryDark"
             android:textSize="@dimen/font_size_large"/>
 
         <TextView
             android:id="@+id/textHostName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_alignEnd="@id/textTitle"
+            android:layout_alignStart="@id/textTitle"
             android:layout_below="@id/textTitle"
             android:maxLines="1"
-            android:layout_alignStart="@id/textTitle"
-            android:layout_alignEnd="@id/textTitle"
-            android:textSize="@dimen/font_size_normal"
             android:text="@string/host_name"
-            android:textColor="@color/colorDarkerGray"/>
+            android:textColor="@color/colorDarkerGray"
+            android:textSize="@dimen/font_size_normal" />
 
 
         <TextView
             android:id="@+id/textExpire"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignStart="@id/textHostName"
-            android:textStyle="bold"
-            android:text="@string/expired_date"
-            android:textSize="@dimen/font_size_small"
-            android:textColor="@color/colorHighLight"
             android:layout_alignParentBottom="true"
-            android:layout_marginBottom="8dp"/>
+            android:layout_alignStart="@id/textHostName"
+            android:layout_marginBottom="8dp"
+            android:text="@string/expired_date"
+            android:textColor="@color/colorHighLight"
+            android:textSize="@dimen/font_size_small"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/textNewCost"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/font_size_large"
-            android:textColor="@color/colorHighLight"
-            android:layout_alignParentEnd="true"
-            android:text="@string/new_cost"
             android:layout_alignBottom="@id/textExpire"
+            android:layout_alignParentEnd="true"
             android:layout_marginEnd="8dp"
             android:layout_marginTop="4dp"
+            android:text="@string/new_cost"
+            android:textColor="@color/colorHighLight"
+            android:textSize="@dimen/font_size_large"
             android:textStyle="bold"/>
 
         <TextView
             android:id="@+id/textOldCost"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/font_size_normal"
-            android:textColor="@color/colorDarkerGray"
-            android:text="@string/old_cost"
             android:layout_alignTop="@id/textNewCost"
-            android:layout_toStartOf="@id/textNewCost"
             android:layout_marginTop="2dp"
+            android:layout_toStartOf="@id/textNewCost"
+            android:text="@string/old_cost"
+            android:textColor="@color/colorDarkerGray"
+            android:textSize="@dimen/font_size_normal"
             android:textStyle="bold"/>
 
     </RelativeLayout>
