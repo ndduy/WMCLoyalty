@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">WMC Loyalty</string>
+    <string name="owner">WMC GROUP</string>
+    <string name="owner_company">Windsor Property \n Management Group</string>
+
+    <string name="btn_sign_in">Sign In</string>
+
+    // Mock Data
+    <string name="pro_title">Holidays Escape (2 days, 1 night)</string>
+    <string name="host_name">IMPERIAL HOTEL</string>
+    <string name="expired_date">EXPIRES 09/01/2016</string>
+    <string name="old_cost">$300</string>
+    <string name="new_cost">$118</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

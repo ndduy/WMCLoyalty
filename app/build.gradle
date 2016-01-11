@@ -1,0 +1,59 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion "23.0.2"
+
+    defaultConfig {
+        applicationId "com.dinosys.wmcloyalty"
+        minSdkVersion 21
+        targetSdkVersion 23
+        versionCode 1
+        versionName "1.0"
+
+        renderscriptTargetApi 20
+        renderscriptSupportModeEnabled true
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    packagingOptions {
+        exclude 'META-INF/services/javax.annotation.processing.Processor'
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    testCompile 'junit:junit:4.12'
+    // Android Support
+    compile 'com.android.support:appcompat-v7:23.1.1'
+    compile 'com.android.support:support-v4:23.1.1'
+    compile 'com.android.support:design:23.1.1'
+    compile 'com.android.support:recyclerview-v7:23.1.1'
+    compile 'com.android.support:cardview-v7:23.1.1'
+    compile 'com.google.dagger:dagger:2.0.2'
+
+    // Dependence Injection
+    compile 'com.google.dagger:dagger-compiler:2.0.2'
+
+    // Annotation & Reactive
+    compile 'javax.annotation:jsr250-api:1.0'
+    compile 'io.reactivex:rxandroid:1.1.0'
+    compile 'io.reactivex:rxjava:1.1.0'
+
+    // HTTP
+    compile 'com.squareup.okhttp:okhttp:2.7.0'
+
+    // Json
+    compile 'com.google.code.gson:gson:2.5'
+
+    // Image
+    compile 'com.github.bumptech.glide:glide:3.6.1'
+    compile 'jp.wasabeef:blurry:1.0.5'
+
+    // Butter Knife
+    compile 'com.jakewharton:butterknife:7.0.1'
+}
