@@ -2,6 +2,7 @@ package com.dinosys.wmcloyalty.ui.fragment.welcome;
 
 import android.animation.TimeInterpolator;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -18,16 +19,19 @@ import android.widget.ProgressBar;
 
 import com.dinosys.wmcloyalty.R;
 import com.dinosys.wmcloyalty.presenter.welcome.PromotionPagerPresenter;
+import com.dinosys.wmcloyalty.ui.activity.TestDragActivity;
 import com.dinosys.wmcloyalty.ui.adapter.welcome.PromotionPagerAdapter;
 import com.dinosys.wmcloyalty.ui.fragment.base.BaseFragment;
 import com.dinosys.wmcloyalty.ui.model.PromotionModel;
 import com.dinosys.wmcloyalty.ui.view.welcome.IPromotionPagerView;
+import com.dinosys.wmcloyalty.util.UIUtil;
 import com.dinosys.wmcloyalty.util.widget.ZoomOutPageTransformer;
 import com.dinosys.wmcloyalty.util.widget.viewpager.CircleIndicator;
 
 import java.util.Collection;
 
 import butterknife.Bind;
+import butterknife.OnClick;
 import jp.wasabeef.blurry.Blurry;
 
 /**
@@ -100,6 +104,11 @@ public class WelcomeFragment extends BaseFragment implements IPromotionPagerView
         }, 3000);
     }
 
+    @OnClick(R.id.btnSignIn)
+    public void onSingIn(View view) {
+        startActivity(new Intent(getContext(), TestDragActivity.class));
+    }
+
     private void runEnterAnimation() {
         // translate signIn Button from the bottom
         // & companyName TextView from the top at the same time
@@ -151,10 +160,11 @@ public class WelcomeFragment extends BaseFragment implements IPromotionPagerView
         mViewPagePros.setClipToPadding(false);
         mViewPagePros.setPageMargin(-100);
         mViewPagePros.setPadding(80, 0, 100, 0);
-        mViewPagePros.setPageTransformer(false, new ZoomOutPageTransformer());
+        mViewPagePros.setPageTransformer(true, new ZoomOutPageTransformer());
 
         this.initialize();
         this.loadPromotionPages();
+        UIUtil.convertDpToPixel(20, getContext());
     }
 
     private void initialize() {

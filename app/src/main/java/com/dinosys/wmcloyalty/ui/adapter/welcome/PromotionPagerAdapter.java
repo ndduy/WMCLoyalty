@@ -3,6 +3,7 @@ package com.dinosys.wmcloyalty.ui.adapter.welcome;
 import android.content.Context;
 import android.graphics.Paint;
 import android.support.v4.view.PagerAdapter;
+import android.support.v7.widget.CardView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -41,6 +42,7 @@ public class PromotionPagerAdapter extends PagerAdapter {
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
         View view = View.inflate(this.mContext, R.layout.adapter_viewpage_item_promotion, null);
+        ((CardView) view).setPreventCornerOverlap(false);
         final PromotionModel promotionModel = mPromotionModels.get(position);
         TextView textOldCost = (TextView) view.findViewById(R.id.textOldCost);
         textOldCost.setPaintFlags(textOldCost.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);

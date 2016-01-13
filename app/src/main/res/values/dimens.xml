@@ -11,4 +11,5 @@
     <dimen name="font_size_xlarge">24sp</dimen>
     <dimen name="font_size_xxlarge">36sp</dimen>
 
+    <dimen name="page_margin">40dp</dimen>
 </resources>

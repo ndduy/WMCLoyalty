@@ -1,6 +1,8 @@
 package com.dinosys.wmcloyalty.util.widget;
 
+import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.View;
 
 /**
@@ -15,6 +17,11 @@ public class ZoomOutPageTransformer implements ViewPager.PageTransformer {
     public void transformPage(View view, float position) {
         int pageWidth = view.getWidth();
         int pageHeight = view.getHeight();
+        Log.d("HTSI", "Get ScrollX " + ((ViewPager) view.getParent()).getScrollX());
+        Log.d("HTSI", "Before - ViewPage: width = " + pageWidth
+                + " - height = " + pageHeight
+                + " - Pos = " + position + " - x =" + view.getX());
+
 
         if (position < -1) { // [-Infinity,-1)
             // This page is way off-screen to the left.
@@ -34,19 +41,26 @@ public class ZoomOutPageTransformer implements ViewPager.PageTransformer {
             // Scale the page down (between MIN_SCALE and 1)
             view.setScaleX(scaleFactor);
             view.setScaleY(scaleFactor);
-            view.setElevation(scaleFactor);
+            ViewCompat.setTranslationZ(view, scaleFactor);
 
             // Fade the page relative to its size.
-            if (position > 0 && position < 0.75)
+            if (position > 0 && position < 0.75) {
                 view.setAlpha(1.0f);
-            else
+            } else {
                 view.setAlpha(MIN_ALPHA +
                         (scaleFactor - MIN_SCALE) /
                                 (1 - MIN_SCALE) * (1 - MIN_ALPHA));
+            }
 
         } else { // (1,+Infinity]
             // This page is way off-screen to the right.
             view.setAlpha(0);
         }
+
+        Log.d("HTSI", "After ViewPage: width = " + pageWidth
+                + " - height = " + pageHeight
+                + " - Pos = " + position + " - x =" + view.getX());
     }
+
+
 }

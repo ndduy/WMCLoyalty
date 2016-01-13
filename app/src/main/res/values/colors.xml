@@ -6,4 +6,6 @@
     <color name="colorHighLight">#EF6C00</color>
     <color name="colorDarkerGray">@android:color/darker_gray</color>
     <color name="background_holo_light">#26f3f3f3</color>
+    <color name="light_grey">#fff5f5f5</color>
+    <color name="scrim_color">#99323232</color>
 </resources>

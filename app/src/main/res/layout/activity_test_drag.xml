@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.dinosys.wmcloyalty.util.widget.ElasticDragDismissFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/draggable_frame"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:dragDismissDistance="112dp"
+    app:dragDismissScale="0.95"
+    tools:context="com.dinosys.wmcloyalty.ui.activity.TestDragActivity">
+
+
+    <android.support.v4.widget.NestedScrollView
+        android:id="@+id/scroll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/light_grey"
+            android:orientation="vertical">
+
+            <com.dinosys.wmcloyalty.util.widget.ParallaxScrimageView
+                android:id="@+id/shot"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="168dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/skyline_hotel_nyc"
+                app:maxScrimAlpha="0.4"
+                app:parallaxFactor="-0.5"
+                app:scrimAlpha="0"
+                app:scrimColor="#99323232" />
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/host_name"
+                android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+                android:textColor="@color/colorAccent" />
+
+            <TextView
+                android:id="@+id/description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:text="@string/lorem_ipsum"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+
+        </LinearLayout>
+
+
+    </android.support.v4.widget.NestedScrollView>
+
+
+</com.dinosys.wmcloyalty.util.widget.ElasticDragDismissFrameLayout>
