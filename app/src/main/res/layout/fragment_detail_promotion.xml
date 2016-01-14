@@ -31,7 +31,7 @@
                 android:contentDescription="@null"
                 android:minHeight="168dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/skyline_hotel_nyc"/>
+                android:src="@drawable/hotel_windsor" />
 
             <TextView
                 android:id="@+id/title"

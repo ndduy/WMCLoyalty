@@ -7,7 +7,7 @@
 
     // Mock Data
     <string name="pro_title">Holidays Escape (2 days, 1 night)</string>
-    <string name="host_name">IMPERIAL HOTEL</string>
+    <string name="host_name">WINDSOR HOTEL</string>
     <string name="expired_date">EXPIRES 09/01/2016</string>
     <string name="old_cost">$300</string>
     <string name="new_cost">$118</string>

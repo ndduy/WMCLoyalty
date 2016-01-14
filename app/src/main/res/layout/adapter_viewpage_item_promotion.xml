@@ -1,59 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/card_view"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:elevation="4dp"
-    android:foreground="?android:attr/selectableItemBackground"
-    >
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:foreground="?android:attr/selectableItemBackground">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        >
-
-        <ImageView
-            android:id="@+id/imgCover"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:contentDescription="@null"
-            android:scaleType="centerCrop"
-            android:src="@drawable/skyline_hotel_nyc" />
-
-        <TextView
-            android:id="@+id/textTitle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/imgCover"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:text="@string/pro_title"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="@dimen/font_size_large"/>
-
-        <TextView
-            android:id="@+id/textHostName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@id/textTitle"
-            android:layout_alignRight="@id/textTitle"
-            android:layout_below="@id/textTitle"
-            android:maxLines="1"
-            android:text="@string/host_name"
-            android:textColor="@color/colorDarkerGray"
-            android:textSize="@dimen/font_size_normal" />
-
+        android:layout_height="match_parent">
 
         <TextView
             android:id="@+id/textExpire"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@id/textHostName"
-            android:layout_below="@id/textHostName"
-            android:layout_marginBottom="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="@dimen/default_margin_small"
+            android:layout_marginLeft="@dimen/default_margin_small"
+            android:layout_marginTop="@dimen/default_margin_small"
             android:text="@string/expired_date"
             android:textColor="@color/colorHighLight"
             android:textSize="@dimen/font_size_small"
@@ -65,24 +28,60 @@
             android:layout_height="wrap_content"
             android:layout_alignBottom="@id/textExpire"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="8dp"
-            android:layout_marginTop="4dp"
+            android:layout_marginRight="@dimen/default_margin_small"
             android:text="@string/new_cost"
             android:textColor="@color/colorHighLight"
             android:textSize="@dimen/font_size_large"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/textOldCost"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignTop="@id/textNewCost"
+            android:layout_marginLeft="@dimen/default_margin_small"
+            android:layout_marginRight="2dp"
             android:layout_marginTop="2dp"
             android:layout_toLeftOf="@id/textNewCost"
+            android:layout_toRightOf="@id/textExpire"
+            android:gravity="right"
             android:text="@string/old_cost"
             android:textColor="@color/colorDarkerGray"
             android:textSize="@dimen/font_size_normal"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textHostName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/textExpire"
+            android:layout_alignLeft="@id/textExpire"
+            android:layout_marginRight="@dimen/default_margin_small"
+            android:maxLines="1"
+            android:text="@string/host_name"
+            android:textColor="@color/colorDarkerGray"
+            android:textSize="@dimen/font_size_normal" />
+
+        <TextView
+            android:id="@+id/textTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/textHostName"
+            android:layout_alignLeft="@id/textExpire"
+            android:layout_alignRight="@id/textHostName"
+            android:layout_marginTop="@dimen/default_margin_small"
+            android:text="@string/pro_title"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="@dimen/font_size_large" />
+
+        <ImageView
+            android:id="@+id/imgCover"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@id/textTitle"
+            android:contentDescription="@null"
+            android:scaleType="centerCrop"
+            android:src="@drawable/hotel_windsor" />
 
     </RelativeLayout>
 

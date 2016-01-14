@@ -164,13 +164,13 @@ public class WelcomeFragment extends BaseFragment implements IPromotionPagerView
             }
         });
         int defaultMargin = getResources().getDimensionPixelSize(R.dimen.default_margin_medium);
-        int viewPageWidth = displayMetrics.widthPixels - defaultMargin * 2;
-        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(viewPageWidth, viewPageWidth);
+        int viewPageSize = displayMetrics.widthPixels - defaultMargin * 2;
+        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(viewPageSize, viewPageSize);
         params.leftMargin = params.rightMargin = defaultMargin;
         params.gravity = Gravity.CENTER;
         mViewPagePros.setLayoutParams(params);
-        int pageMargin = (int) (viewPageWidth * 0.2f);
-        mViewPagePros.setOffscreenPageLimit(5);
+        int pageMargin = (int) (viewPageSize * 0.2f);
+        mViewPagePros.setOffscreenPageLimit(3);
         mViewPagePros.setClipChildren(false);
         mViewPagePros.setPageMargin(-pageMargin / 4);
         mViewPagePros.setPageTransformer(false, new ZoomOutPageTransformer());

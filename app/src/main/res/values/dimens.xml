@@ -12,6 +12,8 @@
     <dimen name="font_size_xxlarge">36sp</dimen>
 
     <!--DEFAULT MARGIN-->
+    <dimen name="default_margin_small">8dp</dimen>
+    <dimen name="default_margin_normal">16dp</dimen>
     <dimen name="default_margin_medium">32dp</dimen>
 
     <dimen name="page_margin">40dp</dimen>
