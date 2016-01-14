@@ -15,19 +15,16 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:weightSum="5">
-
+        android:layout_height="match_parent">
 
         <TextView
             android:id="@+id/textOwner"
             style="@style/AppTextView"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_marginTop="50dp"
-            android:alpha="1"
+            android:alpha="0"
             android:gravity="center"
             android:text="@string/owner"
             android:textSize="@dimen/font_size_xlarge" />
@@ -36,11 +33,11 @@
             android:id="@+id/btnSignIn"
             style="@style/AppButton"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="50dp"
-            android:layout_marginLeft="@dimen/activity_horizontal_margin"
-            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:layout_marginLeft="@dimen/default_margin_medium"
+            android:layout_marginRight="@dimen/default_margin_medium"
             android:alpha="0"
             android:text="@string/btn_sign_in" />
 
@@ -54,13 +51,32 @@
             android:text="@string/owner_company"
             android:textSize="@dimen/font_size_xxlarge" />
 
+
+
+        <com.dinosys.wmcloyalty.util.widget.pagercontainer.PagerContainer
+            android:id="@+id/pageContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true">
+
+            <android.support.v4.view.ViewPager
+                android:id="@+id/viewPagePromotions"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="@dimen/default_margin_medium"
+                android:layout_marginRight="@dimen/default_margin_medium"
+                android:alpha="0" />
+
+        </com.dinosys.wmcloyalty.util.widget.pagercontainer.PagerContainer>
+
         <com.dinosys.wmcloyalty.util.widget.indicator.CircleIndicator
             android:id="@+id/indicator"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:layout_above="@id/btnSignIn"
+            android:layout_below="@id/pageContainer"
             android:layout_centerVertical="true"
-            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
             android:visibility="gone"
             CircleIndicator:ci_background="@android:color/white"
             CircleIndicator:ci_gravity="center"
@@ -68,23 +84,6 @@
             CircleIndicator:ci_mode="outside"
             CircleIndicator:ci_radius="5dp"
             CircleIndicator:ci_selected_background="@color/colorAccent" />
-
-        <com.dinosys.wmcloyalty.util.widget.pagercontainer.PagerContainer
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_above="@id/indicator"
-            android:layout_below="@id/textOwner"
-            android:layout_marginTop="50dp">
-
-            <android.support.v4.view.ViewPager
-                android:id="@+id/viewPagePromotions"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/default_margin_medium"
-                android:alpha="0" />
-
-        </com.dinosys.wmcloyalty.util.widget.pagercontainer.PagerContainer>
-
 
         <ProgressBar
             android:id="@+id/viewLoading"

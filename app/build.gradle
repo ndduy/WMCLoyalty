@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "com.dinosys.wmcloyalty"
-        minSdkVersion 21
+        minSdkVersion 16
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
@@ -27,6 +27,7 @@ android {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
+    // Testing
     testCompile 'junit:junit:4.12'
     // Android Support
     compile 'com.android.support:appcompat-v7:23.1.1'
@@ -34,14 +35,15 @@ dependencies {
     compile 'com.android.support:design:23.1.1'
     compile 'com.android.support:recyclerview-v7:23.1.1'
     compile 'com.android.support:cardview-v7:23.1.1'
-    compile 'com.google.dagger:dagger:2.0.2'
+    compile 'com.android.support:palette-v7:23.1.1'
     // Dependence Injection
     compile 'com.google.dagger:dagger-compiler:2.0.2'
+    compile 'com.google.dagger:dagger:2.0.2'
     // Annotation & Reactive
     compile 'javax.annotation:jsr250-api:1.0'
     compile 'io.reactivex:rxandroid:1.1.0'
     compile 'io.reactivex:rxjava:1.1.0'
-    // HTTP
+    // HTTP Connection
     compile 'com.squareup.okhttp:okhttp:2.7.0'
     // Json
     compile 'com.google.code.gson:gson:2.5'
@@ -50,5 +52,6 @@ dependencies {
     compile 'jp.wasabeef:blurry:1.0.5'
     // Butter Knife
     compile 'com.jakewharton:butterknife:7.0.1'
-    compile 'com.android.support:palette-v7:23.1.1'
+    // Transitions
+    compile 'com.github.andkulikov:transitions-everywhere:1.4.0'
 }

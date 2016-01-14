@@ -8,12 +8,16 @@ import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
 import android.util.DisplayMetrics;
+import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 
@@ -84,7 +88,7 @@ public class WelcomeFragment extends BaseFragment implements IPromotionPagerView
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_home_new, container, false);
+        return inflater.inflate(R.layout.fragment_home, container, false);
     }
 
     @Override
@@ -150,8 +154,21 @@ public class WelcomeFragment extends BaseFragment implements IPromotionPagerView
     private void setupViewPage() {
         // set properties ViewPager' appearance like Gallery
         DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
+
+        mViewPagePros.getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
+            @Override
+            public boolean onPreDraw() {
+                mViewPagePros.getViewTreeObserver().removeOnPreDrawListener(this);
+                Log.d("HTSI", "PageWidth = " + mViewPagePros.getWidth());
+                return true;
+            }
+        });
         int defaultMargin = getResources().getDimensionPixelSize(R.dimen.default_margin_medium);
-        float viewPageWidth = displayMetrics.widthPixels - defaultMargin * 2;
+        int viewPageWidth = displayMetrics.widthPixels - defaultMargin * 2;
+        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(viewPageWidth, viewPageWidth);
+        params.leftMargin = params.rightMargin = defaultMargin;
+        params.gravity = Gravity.CENTER;
+        mViewPagePros.setLayoutParams(params);
         int pageMargin = (int) (viewPageWidth * 0.2f);
         mViewPagePros.setOffscreenPageLimit(5);
         mViewPagePros.setClipChildren(false);

@@ -1,24 +1,12 @@
-/*
- * Copyright 2015 Google Inc.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
+package com.dinosys.wmcloyalty.util.widget.framelayout;
 
-package com.dinosys.wmcloyalty.util.widget;
-
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.os.Build;
+import android.support.v4.view.ViewCompat;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.animation.AnimationUtils;
@@ -38,12 +26,12 @@ import java.util.List;
  */
 public class ElasticDragDismissFrameLayout extends FrameLayout {
 
-    // configurable attribs
+    // configurable attributes
     private float dragDismissDistance = Float.MAX_VALUE;
     private float dragDismissFraction = -1f;
     private float dragDismissScale = 1f;
     private boolean shouldScale = false;
-    private float dragElacticity = 0.8f;
+    private float dragElasticity = 0.8f;
 
     // state
     private float totalDrag;
@@ -53,21 +41,16 @@ public class ElasticDragDismissFrameLayout extends FrameLayout {
     private List<ElasticDragDismissListener> listeners;
 
     public ElasticDragDismissFrameLayout(Context context) {
-        this(context, null, 0, 0);
+        this(context, null, 0);
     }
 
     public ElasticDragDismissFrameLayout(Context context, AttributeSet attrs) {
-        this(context, attrs, 0, 0);
+        this(context, attrs, 0);
     }
 
     public ElasticDragDismissFrameLayout(Context context, AttributeSet attrs,
                                          int defStyleAttr) {
-        this(context, attrs, defStyleAttr, 0);
-    }
-
-    public ElasticDragDismissFrameLayout(Context context, AttributeSet attrs,
-                                         int defStyleAttr, int defStyleRes) {
-        super(context, attrs, defStyleAttr, defStyleRes);
+        super(context, attrs, defStyleAttr);
 
         final TypedArray a = getContext().obtainStyledAttributes(
                 attrs, R.styleable.ElasticDragDismissFrameLayout, 0, 0);
@@ -85,15 +68,16 @@ public class ElasticDragDismissFrameLayout extends FrameLayout {
             shouldScale = dragDismissScale != 1f;
         }
         if (a.hasValue(R.styleable.ElasticDragDismissFrameLayout_dragElasticity)) {
-            dragElacticity = a.getFloat(R.styleable.ElasticDragDismissFrameLayout_dragElasticity,
-                    dragElacticity);
+            dragElasticity = a.getFloat(R.styleable.ElasticDragDismissFrameLayout_dragElasticity,
+                    dragElasticity);
         }
         a.recycle();
     }
 
     @Override
     public boolean onStartNestedScroll(View child, View target, int nestedScrollAxes) {
-        return (nestedScrollAxes & View.SCROLL_AXIS_VERTICAL) != 0;
+        Log.d("HTSI", "onStartNestedScroll" + nestedScrollAxes + " - " + ViewCompat.SCROLL_AXIS_VERTICAL);
+        return (nestedScrollAxes & ViewCompat.SCROLL_AXIS_VERTICAL) != 0;
     }
 
     @Override
@@ -122,7 +106,7 @@ public class ElasticDragDismissFrameLayout extends FrameLayout {
                     .scaleY(1f)
                     .setDuration(200L)
                     .setInterpolator(AnimationUtils.loadInterpolator(getContext(), android.R
-                            .interpolator.fast_out_slow_in))
+                            .interpolator.accelerate_decelerate))
                     .setListener(null)
                     .start();
             totalDrag = 0;
@@ -172,7 +156,7 @@ public class ElasticDragDismissFrameLayout extends FrameLayout {
         float dragFraction = (float) Math.log10(1 + (Math.abs(totalDrag) / dragDismissDistance));
 
         // calculate the desired translation given the drag fraction
-        float dragTo = dragFraction * dragDismissDistance * dragElacticity;
+        float dragTo = dragFraction * dragDismissDistance * dragElasticity;
 
         if (draggingUp) {
             // as we use the absolute magnitude when calculating the drag fraction, need to
@@ -255,12 +239,12 @@ public class ElasticDragDismissFrameLayout extends FrameLayout {
             this.window = window;
         }
 
+        @TargetApi(Build.VERSION_CODES.LOLLIPOP)
         @Override
         public void onDrag(float elasticOffset, float elasticOffsetPixels,
                            float rawOffset, float rawOffsetPixels) {
             if (elasticOffsetPixels < 0) {
                 // dragging upward, fade the navigation bar in proportion
-                // TODO don't fade nav bar on landscape phones?
                 window.setNavigationBarColor(ColorUtils.modifyAlpha(window.getNavigationBarColor(),
                         1f - rawOffset));
             } else if (elasticOffsetPixels == 0) {

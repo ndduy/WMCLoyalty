@@ -1,25 +1,17 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="AppThemeBase" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:windowTranslucentStatus">true</item>
 
     </style>
 
-    <style name="AppButton" parent="Widget.AppCompat.Button.Colored">
-        <item name="android:textColor">#FFF</item>
-    </style>
+    <style name="AppTheme" parent="AppThemeBase" />
 
-    <style name="AppTextView" parent="TextAppearance.AppCompat">
-        <item name="android:textColor">@color/colorPrimary</item>
-        <item name="android:fontFamily">sans-serif-light</item>
-    </style>
-
-    <style name="AppTheme.Translucent">
+    <style name="AppThemeBase.Translucent" parent="AppTheme">
         <!-- using a semi-transparent window background for the drag-back gesture -->
         <item name="android:windowBackground">@color/scrim_color</item>
         <item name="android:colorBackgroundCacheHint">@null</item>
@@ -27,7 +19,18 @@
         <item name="android:windowIsFloating">false</item>
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowNoTitle">true</item>
-        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+    </style>
+
+    <style name="AppTheme.Translucent" parent="AppThemeBase.Translucent" />
+
+
+    <style name="AppButton" parent="Widget.AppCompat.Button.Colored">
+        <item name="android:textColor">#FFF</item>
+        <item name="android:fontFamily">sans-serif-light</item>
+    </style>
+
+    <style name="AppTextView" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/colorPrimary</item>
     </style>
 
 </resources>

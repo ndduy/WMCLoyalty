@@ -2,7 +2,6 @@ package com.dinosys.wmcloyalty.util.widget.pagercontainer;
 
 import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.View;
 
 /**
@@ -17,10 +16,10 @@ public class ZoomOutPageTransformer implements ViewPager.PageTransformer {
     public void transformPage(View view, float position) {
         int pageWidth = view.getWidth();
         int pageHeight = view.getHeight();
-        Log.d("HTSI", "Get ScrollX " + ((ViewPager) view.getParent()).getScrollX());
+        /*Log.d("HTSI", "Get ScrollX " + ((ViewPager) view.getParent()).getScrollX());
         Log.d("HTSI", "Before - ViewPage: width = " + pageWidth
                 + " - height = " + pageHeight
-                + " - Pos = " + position + " - x =" + view.getX());
+                + " - Pos = " + position + " - x =" + view.getX());*/
 
         if (position < -1) { // [-Infinity,-1)
             // This page is way off-screen to the left.

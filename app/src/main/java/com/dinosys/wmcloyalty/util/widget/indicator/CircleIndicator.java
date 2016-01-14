@@ -86,24 +86,26 @@ public class CircleIndicator extends View {
     }
 
     private void setUpListener() {
-        viewPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
+        if (viewPager != null) {
+            viewPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
 
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                super.onPageScrolled(position, positionOffset, positionOffsetPixels);
-                if (mIndicatorMode != Mode.SOLO) {
-                    trigger(position, positionOffset);
+                @Override
+                public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                    super.onPageScrolled(position, positionOffset, positionOffsetPixels);
+                    if (mIndicatorMode != Mode.SOLO) {
+                        trigger(position, positionOffset);
+                    }
                 }
-            }
 
-            @Override
-            public void onPageSelected(int position) {
-                super.onPageSelected(position);
-                if (mIndicatorMode == Mode.SOLO) {
-                    trigger(position, 0);
+                @Override
+                public void onPageSelected(int position) {
+                    super.onPageSelected(position);
+                    if (mIndicatorMode == Mode.SOLO) {
+                        trigger(position, 0);
+                    }
                 }
-            }
-        });
+            });
+        }
     }
 
     private void trigger(int position, float positionOffset) {
@@ -130,7 +132,11 @@ public class CircleIndicator extends View {
         OvalShape circle = new OvalShape();
         ShapeDrawable drawable = new ShapeDrawable(circle);
         movingItem = new ShapeHolder(drawable);
-        Paint paint = drawable.getPaint();
+        Paint paint = null;
+        if (drawable == null)
+            paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        else
+            paint = drawable.getPaint();
         paint.setColor(mIndicatorSelectedBackground);
         paint.setAntiAlias(true);
 
