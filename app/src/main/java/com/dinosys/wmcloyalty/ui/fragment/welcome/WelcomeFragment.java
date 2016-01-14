@@ -2,12 +2,12 @@ package com.dinosys.wmcloyalty.ui.fragment.welcome;
 
 import android.animation.TimeInterpolator;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,19 +19,16 @@ import android.widget.ProgressBar;
 
 import com.dinosys.wmcloyalty.R;
 import com.dinosys.wmcloyalty.presenter.welcome.PromotionPagerPresenter;
-import com.dinosys.wmcloyalty.ui.activity.TestDragActivity;
 import com.dinosys.wmcloyalty.ui.adapter.welcome.PromotionPagerAdapter;
 import com.dinosys.wmcloyalty.ui.fragment.base.BaseFragment;
 import com.dinosys.wmcloyalty.ui.model.PromotionModel;
 import com.dinosys.wmcloyalty.ui.view.welcome.IPromotionPagerView;
-import com.dinosys.wmcloyalty.util.UIUtil;
-import com.dinosys.wmcloyalty.util.widget.ZoomOutPageTransformer;
-import com.dinosys.wmcloyalty.util.widget.viewpager.CircleIndicator;
+import com.dinosys.wmcloyalty.util.widget.indicator.CircleIndicator;
+import com.dinosys.wmcloyalty.util.widget.pagercontainer.ZoomOutPageTransformer;
 
 import java.util.Collection;
 
 import butterknife.Bind;
-import butterknife.OnClick;
 import jp.wasabeef.blurry.Blurry;
 
 /**
@@ -87,7 +84,7 @@ public class WelcomeFragment extends BaseFragment implements IPromotionPagerView
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_home, container, false);
+        return inflater.inflate(R.layout.fragment_home_new, container, false);
     }
 
     @Override
@@ -96,17 +93,13 @@ public class WelcomeFragment extends BaseFragment implements IPromotionPagerView
         // UI 1st Scene:
         // Implement like FlashScreen
         // Waiting in 3 seconds then run animation
+
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 runEnterAnimation();
             }
         }, 3000);
-    }
-
-    @OnClick(R.id.btnSignIn)
-    public void onSingIn(View view) {
-        startActivity(new Intent(getContext(), TestDragActivity.class));
     }
 
     private void runEnterAnimation() {
@@ -156,15 +149,17 @@ public class WelcomeFragment extends BaseFragment implements IPromotionPagerView
 
     private void setupViewPage() {
         // set properties ViewPager' appearance like Gallery
-        mViewPagePros.setOffscreenPageLimit(3);
-        mViewPagePros.setClipToPadding(false);
-        mViewPagePros.setPageMargin(-100);
-        mViewPagePros.setPadding(80, 0, 100, 0);
-        mViewPagePros.setPageTransformer(true, new ZoomOutPageTransformer());
+        DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
+        int defaultMargin = getResources().getDimensionPixelSize(R.dimen.default_margin_medium);
+        float viewPageWidth = displayMetrics.widthPixels - defaultMargin * 2;
+        int pageMargin = (int) (viewPageWidth * 0.2f);
+        mViewPagePros.setOffscreenPageLimit(5);
+        mViewPagePros.setClipChildren(false);
+        mViewPagePros.setPageMargin(-pageMargin / 4);
+        mViewPagePros.setPageTransformer(false, new ZoomOutPageTransformer());
 
         this.initialize();
         this.loadPromotionPages();
-        UIUtil.convertDpToPixel(20, getContext());
     }
 
     private void initialize() {

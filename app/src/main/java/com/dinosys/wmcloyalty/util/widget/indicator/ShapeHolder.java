@@ -1,4 +1,4 @@
-package com.dinosys.wmcloyalty.util.widget.viewpager;
+package com.dinosys.wmcloyalty.util.widget.indicator;
 
 import android.graphics.Paint;
 import android.graphics.drawable.ShapeDrawable;
@@ -16,36 +16,40 @@ public class ShapeHolder {
     //private float alpha = 1f;
     private Paint paint;
 
-    public void setPaint(Paint value) {
-        paint = value;
+    public ShapeHolder(ShapeDrawable s) {
+        shape = s;
     }
 
     public Paint getPaint() {
         return paint;
     }
 
-    public void setX(float value) {
-        x = value;
+    public void setPaint(Paint value) {
+        paint = value;
     }
 
     public float getX() {
         return x;
     }
 
-    public void setY(float value) {
-        y = value;
+    public void setX(float value) {
+        x = value;
     }
 
     public float getY() {
         return y;
     }
 
-    public void setShape(ShapeDrawable value) {
-        shape = value;
+    public void setY(float value) {
+        y = value;
     }
 
     public ShapeDrawable getShape() {
         return shape;
+    }
+
+    public void setShape(ShapeDrawable value) {
+        shape = value;
     }
 
     public int getColor() {
@@ -80,10 +84,8 @@ public class ShapeHolder {
         Shape s = shape.getShape();
         s.resize(s.getWidth(), height);
     }
+
     public void resizeShape(final float width,final float height){
         shape.getShape().resize(width,height);
-    }
-    public ShapeHolder(ShapeDrawable s) {
-        shape = s;
     }
 }

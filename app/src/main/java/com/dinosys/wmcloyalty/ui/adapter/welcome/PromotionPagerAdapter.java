@@ -53,7 +53,7 @@ public class PromotionPagerAdapter extends PagerAdapter {
             public void onClick(View view) {
                 if (PromotionPagerAdapter.this.mOnItemClickListener != null) {
 
-                    mOnItemClickListener.onPromotionItemClicked(promotionModel, view);
+                    mOnItemClickListener.onPromotionItemClicked(promotionModel, view.findViewById(R.id.imgCover));
                 }
             }
         });

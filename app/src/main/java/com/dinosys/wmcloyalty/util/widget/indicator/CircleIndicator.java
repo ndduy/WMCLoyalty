@@ -1,4 +1,4 @@
-package com.dinosys.wmcloyalty.util.widget.viewpager;
+package com.dinosys.wmcloyalty.util.widget.indicator;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -24,10 +24,11 @@ import java.util.List;
  * Project: WMCLoyalty
  */
 public class CircleIndicator extends View {
+    private final int DEFAULT_INDICATOR_LAYOUT_GRAVITY = Gravity.CENTER.ordinal();
+    private final int DEFAULT_INDICATOR_MODE = Mode.SOLO.ordinal();
     private ViewPager viewPager;
     private List<ShapeHolder> tabItems;
     private ShapeHolder movingItem;
-
     //config list
     private int mCurItemPosition;
     private float mCurItemPositionOffset;
@@ -37,21 +38,6 @@ public class CircleIndicator extends View {
     private int mIndicatorSelectedBackground;
     private Gravity mIndicatorLayoutGravity;
     private Mode mIndicatorMode;
-
-    private final int DEFAULT_INDICATOR_LAYOUT_GRAVITY = Gravity.CENTER.ordinal();
-    private final int DEFAULT_INDICATOR_MODE = Mode.SOLO.ordinal();
-
-    public enum Gravity {
-        LEFT,
-        CENTER,
-        RIGHT
-    }
-
-    public enum Mode {
-        INSIDE,
-        OUTSIDE,
-        SOLO
-    }
 
     public CircleIndicator(Context context) {
         super(context);
@@ -119,7 +105,6 @@ public class CircleIndicator extends View {
             }
         });
     }
-
 
     private void trigger(int position, float positionOffset) {
         CircleIndicator.this.mCurItemPosition = position;
@@ -237,6 +222,18 @@ public class CircleIndicator extends View {
             canvas.restore();
         }
         canvas.restoreToCount(sc);
+    }
+
+    public enum Gravity {
+        LEFT,
+        CENTER,
+        RIGHT
+    }
+
+    public enum Mode {
+        INSIDE,
+        OUTSIDE,
+        SOLO
     }
 
     /*public void setIndicatorRadius(float mIndicatorRadius) {
