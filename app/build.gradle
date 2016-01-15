@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "com.dinosys.wmcloyalty"
-        minSdkVersion 16
+        minSdkVersion 15
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
@@ -54,4 +54,6 @@ dependencies {
     compile 'com.jakewharton:butterknife:7.0.1'
     // Transitions
     compile 'com.github.andkulikov:transitions-everywhere:1.4.0'
+
+    compile 'com.htsi.support.view:carouselview:1.0.2-alpha'
 }

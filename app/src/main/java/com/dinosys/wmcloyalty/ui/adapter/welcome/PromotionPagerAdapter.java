@@ -46,6 +46,7 @@ public class PromotionPagerAdapter extends PagerAdapter {
         final PromotionModel promotionModel = mPromotionModels.get(position);
         TextView textOldCost = (TextView) view.findViewById(R.id.textOldCost);
         textOldCost.setPaintFlags(textOldCost.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+        view.findViewById(R.id.textTitle).setSelected(true);
         container.addView(view);
 
         view.setOnClickListener(new View.OnClickListener() {

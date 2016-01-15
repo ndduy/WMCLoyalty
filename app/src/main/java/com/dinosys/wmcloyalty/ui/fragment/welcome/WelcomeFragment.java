@@ -1,5 +1,7 @@
 package com.dinosys.wmcloyalty.ui.fragment.welcome;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.animation.TimeInterpolator;
 import android.content.Context;
 import android.graphics.Color;
@@ -7,17 +9,12 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
-import android.util.DisplayMetrics;
-import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 
@@ -28,7 +25,7 @@ import com.dinosys.wmcloyalty.ui.fragment.base.BaseFragment;
 import com.dinosys.wmcloyalty.ui.model.PromotionModel;
 import com.dinosys.wmcloyalty.ui.view.welcome.IPromotionPagerView;
 import com.dinosys.wmcloyalty.util.widget.indicator.CircleIndicator;
-import com.dinosys.wmcloyalty.util.widget.pagercontainer.ZoomOutPageTransformer;
+import com.htsi.support.view.CarouselView;
 
 import java.util.Collection;
 
@@ -58,8 +55,8 @@ public class WelcomeFragment extends BaseFragment implements IPromotionPagerView
     @Bind(R.id.btnSignIn)
     Button mBtnSignIn;
 
-    @Bind(R.id.viewPagePromotions)
-    ViewPager mViewPagePros;
+    @Bind(R.id.carouselView)
+    CarouselView mCarouselView;
 
     @Bind(R.id.indicator)
     CircleIndicator mIndicator;
@@ -67,9 +64,14 @@ public class WelcomeFragment extends BaseFragment implements IPromotionPagerView
     @Bind(R.id.viewLoading)
     ProgressBar mViewLoading;
 
+    ViewPager mViewPagePros;
+
     private PromotionPagerPresenter mPromotionPagerPresenter = new PromotionPagerPresenter();
 
     private PromotionPagerAdapter.OnPromotionItemClickListener mOnPromotionItemClickListener;
+
+    private Handler mHandler;
+    private Runnable mRunnable;
 
     public static WelcomeFragment newInstance() {
         return new WelcomeFragment();
@@ -79,7 +81,7 @@ public class WelcomeFragment extends BaseFragment implements IPromotionPagerView
     public void onAttach(Context context) {
         super.onAttach(context);
         if (context instanceof PromotionPagerAdapter.OnPromotionItemClickListener) {
-            this.mOnPromotionItemClickListener = (PromotionPagerAdapter.OnPromotionItemClickListener)context;
+            this.mOnPromotionItemClickListener = (PromotionPagerAdapter.OnPromotionItemClickListener) context;
         } else {
             throw new IllegalStateException("Activity must implements OnPromotionItemClickListener");
         }
@@ -96,45 +98,39 @@ public class WelcomeFragment extends BaseFragment implements IPromotionPagerView
         super.onScreenVisible();
         // UI 1st Scene:
         // Implement like FlashScreen
-        // Waiting in 3 seconds then run animation
-
-        new Handler().postDelayed(new Runnable() {
+        // Waiting in 3 seconds before running animation
+        mHandler = new Handler();
+        mRunnable = new Runnable() {
             @Override
             public void run() {
                 runEnterAnimation();
             }
-        }, 3000);
+        };
+        mHandler.postDelayed(mRunnable, 3000);
     }
 
     private void runEnterAnimation() {
-        // translate signIn Button from the bottom
-        // & companyName TextView from the top at the same time
-        mBtnSignIn.setTranslationY(mBtnSignIn.getHeight() * 2);
-        mBtnSignIn.animate().setDuration(ANIM_DURATION)
-                .setInterpolator(sDecelerator)
-                .alpha(1)
-                .translationY(0).withStartAction(new Runnable() {
+        // hide 'companyName' TextView firstly...
+        mTextCompanyName.animate().setDuration(ANIM_DURATION)
+                .setInterpolator(sAccelerator)
+                .alpha(0).setListener(new AnimatorListenerAdapter() {
             @Override
-            public void run() {
-                mTextCompanyName.animate().setDuration(ANIM_DURATION)
-                        .setInterpolator(sAccelerator)
-                        .alpha(0).withStartAction(new Runnable() {
-                    @Override
-                    public void run() {
-                        mTextOwner.setTranslationY(-mTextOwner.getHeight() * 2);
-                        mTextOwner.animate().setDuration(ANIM_DURATION)
-                                .setInterpolator(sDecelerator)
-                                .alpha(1)
-                                .translationY(0).withStartAction(new Runnable() {
-                            @Override
-                            public void run() {
-                                // UI 2nd Scene:
-                                // Setup main UI
-                                setupUI();
-                            }
-                        });
-                    }
-                });
+            public void onAnimationEnd(Animator animation) {
+                super.onAnimationEnd(animation);
+                // ...then translate 'signIn' Button from the bottom
+                // & 'owner' TextView from the top at the same time
+                mBtnSignIn.animate().setDuration(ANIM_DURATION)
+                        .setInterpolator(sDecelerator)
+                        .alpha(1)
+                        .translationY(0);
+                mTextOwner.setTranslationY(-mTextOwner.getHeight() * 2);
+                mTextOwner.animate().setDuration(ANIM_DURATION)
+                        .setInterpolator(sDecelerator)
+                        .alpha(1)
+                        .translationY(0);
+                // UI 2nd Scene:
+                // Setup main UI
+                setupUI();
             }
         });
     }
@@ -147,34 +143,7 @@ public class WelcomeFragment extends BaseFragment implements IPromotionPagerView
                 .color(Color.argb(66, 255, 255, 255))
                 .capture(mBg)
                 .into(mBg);
-        // setup view page promotions
-        setupViewPage();
-    }
-
-    private void setupViewPage() {
-        // set properties ViewPager' appearance like Gallery
-        DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
-
-        mViewPagePros.getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
-            @Override
-            public boolean onPreDraw() {
-                mViewPagePros.getViewTreeObserver().removeOnPreDrawListener(this);
-                Log.d("HTSI", "PageWidth = " + mViewPagePros.getWidth());
-                return true;
-            }
-        });
-        int defaultMargin = getResources().getDimensionPixelSize(R.dimen.default_margin_medium);
-        int viewPageSize = displayMetrics.widthPixels - defaultMargin * 2;
-        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(viewPageSize, viewPageSize);
-        params.leftMargin = params.rightMargin = defaultMargin;
-        params.gravity = Gravity.CENTER;
-        mViewPagePros.setLayoutParams(params);
-        int pageMargin = (int) (viewPageSize * 0.2f);
-        mViewPagePros.setOffscreenPageLimit(3);
-        mViewPagePros.setClipChildren(false);
-        mViewPagePros.setPageMargin(-pageMargin / 4);
-        mViewPagePros.setPageTransformer(false, new ZoomOutPageTransformer());
-
+        // setup 'promotions' ViewPager
         this.initialize();
         this.loadPromotionPages();
     }
@@ -197,17 +166,18 @@ public class WelcomeFragment extends BaseFragment implements IPromotionPagerView
         // set adapter & handle item clicked
         PromotionPagerAdapter adapter = new PromotionPagerAdapter(getContext(), promotionModels);
         adapter.setOnItemClickListener(this.mOnPromotionItemClickListener);
-
+        mViewPagePros = mCarouselView.getViewPager();
         mViewPagePros.setAdapter(adapter);
-        // set ScaleXY for animating
+        // set ScaleXY for animating fast out slow in
         mViewPagePros.setScaleX(0.2f);
         mViewPagePros.setScaleY(0.2f);
         mViewPagePros.animate().setDuration(ANIM_DURATION)
                 .setInterpolator(sDecelerator)
                 .alpha(1)
-                .scaleX(1).scaleY(1).withStartAction(new Runnable() {
+                .scaleX(1).scaleY(1).setListener(new AnimatorListenerAdapter() {
             @Override
-            public void run() {
+            public void onAnimationStart(Animator animation) {
+                super.onAnimationStart(animation);
                 // enable Circle Indicator
                 mIndicator.setViewPager(mViewPagePros);
                 mIndicator.setVisibility(View.VISIBLE);
@@ -235,8 +205,8 @@ public class WelcomeFragment extends BaseFragment implements IPromotionPagerView
         mViewLoading.setScaleX(0.0f);
         mViewLoading.setScaleY(0.0f);
         mViewLoading.animate().setDuration(ANIM_DURATION)
-        .alpha(1.0f).setInterpolator(sDecelerator)
-        .scaleX(1.0f).scaleY(1.0f)
+                .alpha(1.0f).setInterpolator(sDecelerator)
+                .scaleX(1.0f).scaleY(1.0f)
         ;
     }
 
@@ -258,5 +228,16 @@ public class WelcomeFragment extends BaseFragment implements IPromotionPagerView
     @Override
     public Context getContext() {
         return getActivity().getApplicationContext();
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        if (mHandler != null) {
+            mHandler.removeCallbacks(mRunnable);
+            mHandler = null;
+            mPromotionPagerPresenter.destroyView();
+            mPromotionPagerPresenter = null;
+        }
     }
 }

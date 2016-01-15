@@ -31,6 +31,7 @@
 
     <style name="AppTextView" parent="TextAppearance.AppCompat">
         <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:fontFamily">sans-serif-light</item>
     </style>
 
 </resources>

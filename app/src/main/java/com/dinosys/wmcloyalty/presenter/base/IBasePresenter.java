@@ -9,4 +9,6 @@ package com.dinosys.wmcloyalty.presenter.base;
 public interface IBasePresenter<ViewType> {
 
     void setView(ViewType view);
+
+    void destroyView();
 }

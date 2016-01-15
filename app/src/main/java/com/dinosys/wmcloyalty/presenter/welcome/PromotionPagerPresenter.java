@@ -19,9 +19,20 @@ public class PromotionPagerPresenter implements IBasePresenter<IPromotionPagerVi
 
     private IPromotionPagerView mPromotionPagerView;
 
+    private Handler mHandler;
+    private Runnable mRunnable;
+
     @Override
     public void setView(IPromotionPagerView view) {
         this.mPromotionPagerView = view;
+    }
+
+    @Override
+    public void destroyView() {
+        if (mHandler != null) {
+            mHandler.removeCallbacks(mRunnable);
+            mHandler = null;
+        }
     }
 
     public void initialize() {
@@ -30,24 +41,26 @@ public class PromotionPagerPresenter implements IBasePresenter<IPromotionPagerVi
     }
 
     private void loadPromotionsData() {
-        new Handler().postDelayed(new Runnable() {
+        mHandler = new Handler();
+        mRunnable = new Runnable() {
             @Override
             public void run() {
                 PromotionPagerPresenter.this.mPromotionPagerView.hideLoading();
                 PromotionPagerPresenter.this.mPromotionPagerView.renderPromotionViewPager(populateData());
             }
-        }, 3000);
+        };
+        mHandler.postDelayed(mRunnable, 3000);
     }
 
     private List<PromotionModel> populateData() {
         List<PromotionModel> promotionModels = new ArrayList<>();
         String newCost = getString(R.string.new_cost);
-            for (int i=0; i<5; i++) {
-                String title = getString(R.string.pro_title);
-                String hostname = getString(R.string.host_name);
-                String expiredDate = getString(R.string.expired_date);
-                String oldCost = getString(R.string.old_cost);
-                PromotionModel promotionModel = new PromotionModel(title, hostname, expiredDate, oldCost, newCost);
+        for (int i = 0; i < 5; i++) {
+            String title = getString(R.string.pro_title);
+            String hostname = getString(R.string.host_name);
+            String expiredDate = getString(R.string.expired_date);
+            String oldCost = getString(R.string.old_cost);
+            PromotionModel promotionModel = new PromotionModel(title, hostname, expiredDate, oldCost, newCost);
             promotionModels.add(promotionModel);
         }
         return promotionModels;
