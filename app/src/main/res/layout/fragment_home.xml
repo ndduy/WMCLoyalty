@@ -27,7 +27,7 @@
             android:alpha="0"
             android:gravity="center"
             android:text="@string/owner"
-            android:textSize="@dimen/default_margin_medium" />
+            android:textSize="@dimen/font_size_xlarge" />
 
         <TextView
             android:id="@+id/textCompanyName"

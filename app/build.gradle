@@ -1,4 +1,6 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.neenbedankt.android-apt'
+apply plugin: 'me.tatarka.retrolambda'
 
 android {
     compileSdkVersion 23
@@ -22,6 +24,10 @@ android {
     }
     packagingOptions {
         exclude 'META-INF/services/javax.annotation.processing.Processor'
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 }
 
@@ -54,6 +60,6 @@ dependencies {
     compile 'com.jakewharton:butterknife:7.0.1'
     // Transitions
     compile 'com.github.andkulikov:transitions-everywhere:1.4.0'
-
+    // Widget
     compile 'com.htsi.support.view:carouselview:1.0.2-alpha'
 }

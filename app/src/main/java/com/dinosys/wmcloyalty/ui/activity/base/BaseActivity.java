@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.dinosys.wmcloyalty.R;
+import com.dinosys.wmcloyalty.app.LoyaltyApplication;
+import com.dinosys.wmcloyalty.di.component.ApplicationComponent;
 import com.dinosys.wmcloyalty.ui.fragment.base.BaseFragment;
 
 import butterknife.ButterKnife;
@@ -19,6 +21,10 @@ import butterknife.ButterKnife;
  * Project: TinhTeLite
  */
 public class BaseActivity extends AppCompatActivity {
+
+    protected ApplicationComponent getApplicationComponent() {
+        return ((LoyaltyApplication) getApplication()).getApplicationComponent();
+    }
 
     protected void setupActivityComponent() {
         // Implement in child class
